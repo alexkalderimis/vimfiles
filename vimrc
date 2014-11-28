@@ -72,9 +72,29 @@ function! s:RunShellCommand(cmdline)
   1
 endfunction
 
-autocmd vimenter *.rb,*.pl,*.py,*.coffee,*.java,*.js NERDTree
+" Open NERDTree for ruby, perl, python, coffee, java, less and js
+autocmd vimenter *.rb,*.pl,*.py,*.coffee,*.java,*.less,*.js NERDTree
+" Go to previous (last accessed) window.
+autocmd VimEnter * wincmd p
+" On exit, also close NERDTree
+autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+
+
 map <C-n> :NERDTreeToggle<CR>
 map <C-h> :NERDTreeFind<CR>
+
+" taken from https://github.com/scrooloose/nerdtree/issues/21
+" Close all open buffers on entering a window if the only
+" buffer that's left is the NERDTree buffer
+function! s:CloseIfOnlyNerdTreeLeft()
+  if exists("t:NERDTreeBufName")
+    if bufwinnr(t:NERDTreeBufName) != -1
+      if winnr("$") == 1
+        q
+      endif
+    endif
+  endif
+endfunction
 
 """"""""""""""""""""""""""
 " Python section
