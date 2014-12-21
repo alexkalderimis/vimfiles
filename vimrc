@@ -16,8 +16,16 @@ set foldmethod=indent
 set foldlevel=99
 set nocompatible
 syntax enable
+
 set background=dark
-colorscheme summerfruit256
+
+" Configure the colorscheme based on the terminal
+if &term =~ "xterm"
+   colorscheme solarized
+else
+   colorscheme railscasts
+endif
+
 let perl_include_pod=1
 
 set laststatus=2
@@ -128,10 +136,15 @@ autocmd BufRead,BufNewFile *.rb
 " Use two-space indentation.
 au BufNewFile,BufReadPost *.coffee,Cakefile setl cc=100 foldmethod=indent ts=2 sw=2
 " Make files on write to catch errors
-au BufWritePost *.coffee,Cakefile CoffeeMake!
+au BufWritePost *.coffee,Cakefile make!
 let coffee_linter = './node_modules/coffeelint/bin/coffeelint'
 let coffee_lint_options = '-f ./coffeelint.json'
 let coffee_make_options = '-o /tmp'
+
+""""""""""""""""""""""""""
+" JSON section
+""""""""""""""""""""""""""
+au BufWritePost *.json ! cat <afile> | json_pp | echo 'ok'
 
 """"""""""""""""""""""""""
 " Jade section

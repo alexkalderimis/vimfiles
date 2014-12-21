@@ -61,3 +61,6 @@
 [submodule "bundle/vim-perl"]
 	path = bundle/vim-perl
 	url = https://github.com/vim-perl/vim-perl.git
+[submodule "bundle/underscore-templates.vim"]
+	path = bundle/underscore-templates.vim
+	url = git@github.com:aaronj1335/underscore-templates.vim.git
