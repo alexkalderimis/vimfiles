@@ -1,1 +1,13 @@
 .VimballRecord
+compiler/
+doc/
+indent/
+syntax/
+ftdetect/
+plugin/
+tmp/
+autoload/Align.vim
+autoload/AlignMaps.vim
+autoload/conque_term
+autoload/conque_term.vim
+.netrwhist
