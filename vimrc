@@ -17,13 +17,13 @@ set foldlevel=99
 set nocompatible
 syntax enable
 
-set background=dark
+set background=light
 
 " Configure the colorscheme based on the terminal
 if &term =~ "xterm"
-   colorscheme solarized
+   colorscheme github
 else
-   colorscheme railscasts
+   colorscheme github
 endif
 
 let perl_include_pod=1
