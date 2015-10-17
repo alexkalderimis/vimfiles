@@ -15,15 +15,16 @@ set incsearch
 set foldmethod=indent
 set foldlevel=99
 set nocompatible
+set backspace=indent,eol,start
 syntax enable
 
 set background=light
 
 " Configure the colorscheme based on the terminal
 if &term =~ "xterm"
-   colorscheme github
+   colorscheme railscasts
 else
-   colorscheme github
+   colorscheme railscasts
 endif
 
 let perl_include_pod=1
