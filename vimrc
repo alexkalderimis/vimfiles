@@ -1,6 +1,8 @@
 call pathogen#infect()
 
 filetype plugin indent on
+filetype plugin on
+syntax enable
 set nocp
 set tabstop=4
 set expandtab
@@ -16,15 +18,13 @@ set foldmethod=indent
 set foldlevel=99
 set nocompatible
 set backspace=indent,eol,start
-syntax enable
+set t_Co=256
 
-set background=light
-
-" Configure the colorscheme based on the terminal
-if &term =~ "xterm"
-   colorscheme railscasts
+if &term =~ "screen"
+    set background=dark
+    colorscheme solarized
 else
-   colorscheme railscasts
+    colorscheme github
 endif
 
 let perl_include_pod=1
@@ -106,6 +106,28 @@ function! s:CloseIfOnlyNerdTreeLeft()
 endfunction
 
 """"""""""""""""""""""""""
+" Haskell section
+""""""""""""""""""""""""""
+
+" When in a code block in bird style, add the comment leader (i.e. '> ')
+autocmd FileType lhaskell setlocal formatoptions+=ro
+
+function! SetToCabalBuild()
+  if glob("*.cabal") != ''
+    set makeprg=cabal\ build
+  endif
+endfunction
+
+autocmd BufEnter *.hs,*.lhs :call SetToCabalBuild()
+
+""""""""""""""""""""""""""
+" XML section
+""""""""""""""""""""""""""
+
+let g:xml_syntax_folding = 1
+autocmd BufEnter *.xml,*.csl setlocal foldmethod=syntax
+
+""""""""""""""""""""""""""
 " Python section
 """"""""""""""""""""""""""
 
@@ -129,6 +151,7 @@ autocmd BufRead,BufNewFile *.rb
     \ command! -complete=file Test call s:RunShellCommand('rake test')
 autocmd BufRead,BufNewFile *.rb
     \ command! -complete=file LiveTest call s:RunShellCommand('rake live_tests')
+au BufNewFile,BufReadPost *.rb,*.rake,Gemfile,Guardfile setl cc=100 foldmethod=indent ts=2 sw=2
 
 """"""""""""""""""""""""""
 " Coffee-Script section
@@ -163,8 +186,12 @@ au Filetype javascript setlocal ts=2 sts=2 sw=2 expandtab
 " Markdown section
 """"""""""""""""""""""""""
 
-au BufNewFile,BufReadPost *.md setl syntax=markdown
+" au BufNewFile,BufReadPost *.md setl syntax=markdown
 au FileType markdown setl ts=4 sw=4 cc=100 tw=80
+
+"""""""""""""""""""""""""""""
+" TMP file storage
+""""""""""""""""""""""""""""
 
 " Store all swap files in central location
 set backupdir=~/.vim/tmp,~/.tmp,/tmp
