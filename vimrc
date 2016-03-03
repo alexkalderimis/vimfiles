@@ -24,8 +24,9 @@ if &term =~ "screen"
     set background=dark
     colorscheme solarized
 else
-    colorscheme github
+    colorscheme summerfruit256
 endif
+highlight Normal ctermbg=none
 
 let perl_include_pod=1
 
